@@ -1,0 +1,16 @@
+{
+  "_comment": "Orbitals (update v327680 / 1.0.5) ExeFS. Hashes only; no game data.",
+  "short_name": "orbitals",
+  "display_name": "Orbitals",
+  "port_version": "0.1.0",
+  "display_version": "1.0.5",
+  "title_id": "040032B023CA4000",
+  "wraps": ["f_7000534660", "f_70034d3790", "f_70000c2cc0"],
+  "exefs_sha256": {
+    "main": "ddac7c7648c98c15cd5b57c15e33ae02aa698503350aa6b40d16de0578f90d40",
+    "main.npdm": "d317e559f1e377dc92ea7e327ddacbfd9fa073ee0b1f8e048e5fdbef3ef90419",
+    "rtld": "7f929435474c0620e503b14727d80fe041d8d79e5afdf82c8f185531824d84ea",
+    "sdk": "d3b35139a0b5c3b73921b60334e359281ae8d41a640b9a1852c4b66768c9053a",
+    "subsdk0": "2c64f8c1132d33edaf58723f8e53914588e2e60d3ebc1ba4d0f42b377a7f8aa3"
+  }
+}
