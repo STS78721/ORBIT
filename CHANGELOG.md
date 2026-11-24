@@ -1,3 +1,9 @@
+## 0.1.1
+
+- Fixed `ModuleNotFoundError: No module named 'hostmem'` (and `check_content`) when running `recomp/gen.py` or `tools/build_game.py` from the packaged release (#1).
+- Fixed isolated Python `sys.path` resolution in `tools/romfs_index.py`.
+- Added an automated isolated staged-Python smoke gate in `tools/build_orbitals_release.py` verifying all build scripts before packing.
+
 # Changelog
 
 All notable changes to **SteelTemple Orbitals** are documented here.

@@ -51,6 +51,8 @@ TOOLS_FILES = (
     "expected.py",
     "host_platform.py",
     "build_shaders.py",
+    "hostmem.py",
+    "check_content.py",
 )
 
 
@@ -417,6 +419,27 @@ def verify_clean_stage(stage: Path) -> None:
     if bad:
         sys.exit("Release stage validation FAILED:\n" + "\n".join(bad[:50]))
     print(f"verify_clean_stage: {file_count} files passed check_content + allowlist rules (zero dev INI/game files/other-title assets).")
+
+    # Verify every staged build/setup script runs cleanly under the isolated staged Python
+    py_exe = stage / "python" / "python.exe"
+    smoke_scripts = (
+        stage / "recomp" / "gen.py",
+        stage / "tools" / "build_game.py",
+        stage / "tools" / "extract_nup.py",
+        stage / "tools" / "pack_romfs.py",
+        stage / "tools" / "romfs_index.py",
+    )
+    for sc in smoke_scripts:
+        r = subprocess.run(
+            [str(py_exe), "-B", "-I", str(sc), "--help"],
+            cwd=stage,
+            env=clean_env(stage / "python"),
+            capture_output=True,
+            text=True,
+        )
+        if r.returncode != 0:
+            sys.exit(f"Staged script smoke test FAILED for {sc.relative_to(stage)}:\n{r.stderr}\n{r.stdout}")
+    print(f"verify_clean_stage: {len(smoke_scripts)} staged build/setup scripts passed isolated --help smoke test.")
 
 
 def compile_setup_stub(work: Path, ver: str) -> Path:
